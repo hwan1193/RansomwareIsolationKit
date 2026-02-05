@@ -19,23 +19,23 @@ ISMS-P 2.10(사고 대응 및 복구): 침해 사고 시 즉각적인 대응 및
 
 ## 파일 구성 및 기능 설명:
 
-Detect.ps1 /	탐지 (Detect) /	Intune PR용 스크립트. 확장자 및 파일 변경 임계치(Burst Count)를 감시하여 격리 필요 여부 판단
+### Detect.ps1 /	탐지 (Detect) /	Intune PR용 스크립트. 확장자 및 파일 변경 임계치(Burst Count)를 감시하여 격리 필요 여부 판단
 
-Remediate.ps1 /	대응 (Remediate) /	탐지 시 실행되는 대응 스크립트. MDE API 격리 시도 후 실패 시 로컬 네트워크 어댑터 차단
+### Remediate.ps1 /	대응 (Remediate) /	탐지 시 실행되는 대응 스크립트. MDE API 격리 시도 후 실패 시 로컬 네트워크 어댑터 차단
 
-Invoke-RansomwareEmergencyIsolation.ps1 /	실시간 감시 /	WMI/FileWatcher 기반 실시간 이벤트 감시 및 즉각 격리 실행용 마스터 스크립트
+### Invoke-RansomwareEmergencyIsolation.ps1 /	실시간 감시 /	WMI/FileWatcher 기반 실시간 이벤트 감시 및 즉각 격리 실행용 마스터 스크립트
 
-PR-Undo-Remediate.ps1 /	복구 (Undo) /	Intune을 통해 배포된 격리 조치(방화벽/네트워크 어댑터)를 안전하게 원복
+### PR-Undo-Remediate.ps1 /	복구 (Undo) /	Intune을 통해 배포된 격리 조치(방화벽/네트워크 어댑터)를 안전하게 원복
 
-Undo-EmergencyIsolation.ps1 /	복구 (Undo) /	실시간 감시 도중 수행된 격리 조치를 로컬 환경에서 수동으로 원복
+### Undo-EmergencyIsolation.ps1 /	복구 (Undo) /	실시간 감시 도중 수행된 격리 조치를 로컬 환경에서 수동으로 원복
 
-Install-RansomwareIsolationScheduler.ps1 /	배포 (Install) /	시스템 권한(SYSTEM)으로 감시/대응 스크립트를 스케줄러에 등록하는 설치 파일
+### Install-RansomwareIsolationScheduler.ps1 /	배포 (Install) /	시스템 권한(SYSTEM)으로 감시/대응 스크립트를 스케줄러에 등록하는 설치 파일
 
-settings.json /	설정 (Config) /	탐지 대상 경로, 제외 패턴(Regex), MDE API 인증 정보 및 격리 정책 설정
+### settings.json /	설정 (Config) /	탐지 대상 경로, 제외 패턴(Regex), MDE API 인증 정보 및 격리 정책 설정
 
-Run_운영 실행 방법_2026.txt /	가이드 /	실제 서버 및 PC 환경에서의 실행 단계와 이벤트 로그 ID 정의서
+### Run_운영 실행 방법_2026.txt /	가이드 /	실제 서버 및 PC 환경에서의 실행 단계와 이벤트 로그 ID 정의서
 
-배포 및 운영 팁_2026.txt /	가이드 /	Intune 배포 시 권장 주기(15분~1시간) 및 운영상의 주의사항(Best Practice)
+### 배포 및 운영 팁_2026.txt /	가이드 /	Intune 배포 시 권장 주기(15분~1시간) 및 운영상의 주의사항(Best Practice)
 
 ## 핵심 아키텍쳐
 
