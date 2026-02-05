@@ -1,0 +1,65 @@
+[Run]
+1) settings.json의 MDE TenantId/ClientId/ClientSecret 설정
+2) 관리자 PowerShell 실행
+3) 실행:
+   powershell -ExecutionPolicy Bypass -File .\Invoke-RansomwareEmergencyIsolation.ps1 -SettingsPath .\settings.json
+
+[Optional]
+- Changed 이벤트까지 포함(오탐↑):
+   powershell -ExecutionPolicy Bypass -File .\Invoke-RansomwareEmergencyIsolation.ps1 -SettingsPath .\settings.json -EnableChangedEvent $true
+
+[Undo]
+- 로컬 격리 원복:
+   powershell -ExecutionPolicy Bypass -File .\Undo-EmergencyIsolation.ps1 -SettingsPath .\settings.json
+
+[Evidence]
+- C:\sec_reports\ 에 실행 로그 저장
+- Windows Event Log (Application) 에 이벤트 기록:
+   9111 Trigger
+   9112 MDE isolate success
+   9113 MDE isolate fail
+   9114 Local isolation applied
+   9211/9212 Undo
+
+==================================================================
+
+결론
+
+✅ 운영 서버/PC 적용 가능
+
+✅ 엔드포인트 즉시 격리(로컬 격리 기준) 가능
+
+✅ 증적/보고서 가능(로그 + 이벤트로그)
+
+✅ Teams 알림 가능(연동만 추가하면 됨)
+
+================================================================
+
+[격리 패키지] Ransomware-Isolation
+
+Detection script: Detect.ps1
+
+Remediation script: Remediate.ps1
+
+Run scripts using the logged-on credentials: No
+
+Run script in 64-bit PowerShell: Yes
+
+Schedule: Every 1 hour
+
+Assignments: 테스트 그룹(예: IT/보안팀) → 안정화 후 전체
+
+==============================================================
+
+[원복 패키지] Ransomware-Undo
+
+(선택1) “수동 실행용”으로 배포만 해두고 필요할 때만 돌림
+
+Detection: “항상 1 반환”(원복 실행 트리거용) 또는 아예 Remediation만 쓰는 방식(조직 정책에 따라)
+
+Remediation: PR-Undo-Remediate.ps1
+
+Schedule은 없거나(수동) / 있더라도 매우 길게(예: 1일)
+→ 원복은 자동 주기 돌리면 사고남(격리 풀어버릴 수 있음)
+
+대부분 회사는 Undo는 “패키지 만들어두고, 필요할 때만 대상 그룹에 잠깐 할당”으로 씀.

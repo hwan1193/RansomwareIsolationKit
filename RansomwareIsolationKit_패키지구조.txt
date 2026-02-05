@@ -1,0 +1,5 @@
+RansomwareIsolationKit/
+  Invoke-RansomwareEmergencyIsolation.ps1
+  Undo-EmergencyIsolation.ps1
+  settings.json
+  README.txt

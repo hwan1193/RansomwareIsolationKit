@@ -1,0 +1,71 @@
+{
+  "WatchPaths": [
+    {
+      "Path": "C:\\Users",
+      "Mode": "DesktopWildcard",
+      "TimeWindowSeconds": 10,
+      "ThresholdCount": 120
+    },
+    {
+      "Path": "D:\\Work",
+      "Mode": "Direct",
+      "TimeWindowSeconds": 10,
+      "ThresholdCount": 300
+    }
+  ],
+
+  "IncludeSubdirectories": true,
+
+  "SuspiciousExtensions": [
+    ".locky", ".encrypted", ".crypt", ".crypto", ".ryk", ".ryuk", ".conti",
+    ".akira", ".clop", ".revil", ".blackcat", ".wannacry", ".tesla", ".stop"
+  ],
+
+  "ExcludePathRegex": [
+    "\\\\node_modules\\\\",
+    "\\\\bin\\\\",
+    "\\\\obj\\\\",
+    "\\\\target\\\\",
+    "\\\\dist\\\\",
+    "\\\\.git\\\\",
+    "\\\\venv\\\\",
+    "\\\\AppData\\\\",
+    "\\\\OneDriveTemp\\\\",
+    "\\\\Microsoft\\\\Office\\\\",
+    "\\\\Packages\\\\"
+  ],
+
+  "AllowProcessNames": [
+    "msbuild", "devenv", "dotnet", "node", "npm", "pnpm", "yarn",
+    "robocopy", "xcopy", "7z", "winrar", "git", "python",
+    "OneDrive", "Teams", "OUTLOOK", "EXCEL", "POWERPNT", "WINWORD"
+  ],
+
+  "DryRun": false,
+
+  "Isolation": {
+    "UseMDE": true,
+    "FallbackLocalAdapterDisable": true,
+    "DisableOnlyPhysicalAdapters": true,
+    "LocalFirewallOutboundBlockInsteadOfAdapterDisable": false
+  },
+
+  "Logging": {
+    "LogDir": "C:\\sec_reports",
+    "EventLog": {
+      "Enabled": true,
+      "Source": "RansomwareIsolationKit",
+      "LogName": "Application"
+    }
+  },
+
+  "MDE": {
+    "TenantId": "YOUR_TENANT_ID",
+    "ClientId": "YOUR_APP_CLIENT_ID",
+    "ClientSecret": "YOUR_APP_CLIENT_SECRET",
+    "Scope": "https://api.security.microsoft.com/.default",
+    "ApiBase": "https://api.security.microsoft.com",
+    "IsolateComment": "Auto-isolation triggered by file-burst monitor (RansomwareIsolationKit).",
+    "IsolationType": "Full"
+  }
+}

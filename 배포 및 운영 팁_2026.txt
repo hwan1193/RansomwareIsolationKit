@@ -1,0 +1,38 @@
+초기: 1시간
+1~2일 튜닝 후: 15분
+
+Intune Proactive Remediation 만들 때 옵션은 이렇게:
+
+Run script using the logged-on credentials: No
+
+Run script in 64-bit PowerShell: Yes
+
+Schedule: Every 1 hour
+
+Assignments: 테스트 그룹 → 전체 확대
+
+==================================================
+
+결론: 기존 실시간 스크립트는 그대로 두고,
+Intune용으로 Detect/Remediate를 “추가”하는 게 정답.
+
+실시간 대응(Watcher)은 수동/긴급/특정 PC에만
+
+Intune PR은 전사 운영(폴링)용
+
+===================================================
+
+배포/운영 팁 :
+
+격리(Detect/Remediate) 패키지 1개
+
+원복(Undo Remediate) 패키지 1개
+이렇게 2개를 Intune에 등록해두면 돼.
+
+그리고 “원복”은 보통:
+
+스케줄 주기 실행 X (오탐으로 격리됐을 때만)
+
+필요할 때 수동 실행(대상 그룹에 할당/즉시 실행) 느낌으로 씀
+
+
